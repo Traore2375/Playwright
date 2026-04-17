@@ -30,10 +30,10 @@ jobs:
         run: mvn clean install
 
       - name: Install Playwright browsers
-        run: mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install"
+        run: mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install --with-deps"
 
       - name: Run tests
-        run: mvn test
+        run: mvn clean test -e
 
       - name: Upload Cucumber report
         uses: actions/upload-artifact@v4
