@@ -130,5 +130,5 @@ target/cucumber.html
 ---
 
 ## Author
-
-Automation framework created with Playwright + Java.
+TRAORE
+Automation framework created with Playwright + Java+ github + JENKINS CI/CD.
