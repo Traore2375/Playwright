@@ -7,26 +7,19 @@ pipeline {
 
     stages {
 
-        stage('Checkout Code') {
+        stage('Checkout') {
             steps {
-                git branch: 'master',
-                url: 'https://github.com/Traore2375/Playwright.git'
+                git url: 'https://github.com/Traore2375/Playwright.git', branch: 'master'
             }
         }
 
-        stage('Clean Project') {
+        stage('Build') {
             steps {
-                bat 'mvn clean'
+                bat 'mvn clean install -DskipTests'
             }
         }
 
-        stage('Install Dependencies') {
-            steps {
-                bat 'mvn install -DskipTests'
-            }
-        }
-
-        stage('Install Playwright Browsers') {
+        stage('Install Playwright') {
             steps {
                 bat 'mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install"'
             }
@@ -38,35 +31,25 @@ pipeline {
             }
         }
 
-        stage('Generate Reports') {
+        stage('Generate Cucumber Report') {
             steps {
-                cucumber fileIncludePattern: '**/cucumber.json',
-                         sortingMethod: 'ALPHABETICAL'
-
-                publishHTML([
-                    allowMissing: false,
-                    alwaysLinkToLastBuild: true,
-                    keepAll: true,
-                    reportDir: 'target',
-                    reportFiles: 'cucumber.html',
-                    reportName: 'Cucumber HTML Report'
-                ])
+                cucumber fileIncludePattern: '**/cucumber.json'
             }
         }
     }
 
     post {
 
+        always {
+            archiveArtifacts artifacts: 'target/**/*.*', fingerprint: true
+        }
+
         success {
-            echo '✅ Build and tests SUCCESS'
+            echo '✅ SUCCESS'
         }
 
         failure {
-            echo '❌ Build FAILED - check reports'
-        }
-
-        always {
-            archiveArtifacts artifacts: 'target/**/*.*', fingerprint: true
+            echo '❌ FAILURE - check reports'
         }
     }
 }
