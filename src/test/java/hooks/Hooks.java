@@ -12,25 +12,42 @@ public class Hooks {
 
     @Before
     public void setUp() {
-        String url = ConfigLoader.get("base.url");
 
-        page.navigate(url);
+        // 1. Init Playwright
         playwright = Playwright.create();
 
+        // 2. Launch browser
         browser = playwright.chromium().launch(
-                new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(200)
+                new BrowserType.LaunchOptions()
+                        .setHeadless(false)
+                        .setSlowMo(200)
         );
 
-        page = browser.newPage();
+        // 3. Create context + page
+        BrowserContext context = browser.newContext();
+        page = context.newPage();
 
+        // 4. Load config URL (option clean)
+        String url = ConfigLoader.get("base.url");
 
-        page.navigate("https://demoqa.com");
+        // fallback si null
+        if (url == null) {
+            url = "https://demoqa.com";
+        }
 
-        System.out.println("Browser started");
+        // 5. Navigate
+        page.navigate(url);
+
+        System.out.println("Browser started successfully");
     }
+
     @After
-    public void teardown(){
-        page.close();
-    }
+    public void teardown() {
 
+        if (page != null) page.close();
+        if (browser != null) browser.close();
+        if (playwright != null) playwright.close();
+
+        System.out.println("Browser closed");
+    }
 }
