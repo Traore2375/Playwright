@@ -1,7 +1,7 @@
+
 Feature: Automate Checkbox
 
   Background:
-
 
   Scenario: Filling the forms
     Given go to site  and textbox section "https://demoqa.com/text-box"

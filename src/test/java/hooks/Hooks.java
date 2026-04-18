@@ -3,6 +3,7 @@ package hooks;
 import com.microsoft.playwright.*;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import utils.ExcelUtils;
 
 public class Hooks {
 
@@ -11,8 +12,13 @@ public class Hooks {
     public static Page page;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
 
+
+        String dossier = System.getProperty("user.dir");
+        String path = dossier +"/src/test/resources/data/Testdata.xlsx" ;
+        System.out.println(" le chemin est :"+path);
+        ExcelUtils.setExcelFile(path, "data");
         // 1. Init Playwright
         playwright = Playwright.create();
 

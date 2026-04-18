@@ -53,4 +53,6 @@ public class pageForms {
     public void submit(){
         btnsubmit().click();
     }
+    // Assertions (IMPORTANT FIX)
+
 }
