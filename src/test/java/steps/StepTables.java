@@ -18,8 +18,8 @@ public class StepTables {
 
         String firstname = ExcelUtils.getCellData(3,0);
         String lastname = ExcelUtils.getCellData(3,1);
-        String email = ExcelUtils.getCellData(3,3);
-        String number = ExcelUtils.getCellData(3,6);
+        String email = ExcelUtils.getCellData(3,2);
+        String number = ExcelUtils.getCellData(3,4);
         pageTables.filltable(firstname,lastname,email,number,string5,string6);
     }
     @When("click submit button")

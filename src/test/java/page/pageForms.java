@@ -2,6 +2,11 @@ package page;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.options.AriaRole;
+import org.testng.Assert;
+
+import java.nio.file.Paths;
 
 public class pageForms {
     private Page page;
@@ -35,6 +40,14 @@ public class pageForms {
         return page.locator("#currentAddress");
     }
 
+    private  Locator btnState(){
+        return page.locator("#state");
+    }
+    private  Locator btnCity(){
+        return page.locator("#city");
+    }
+
+
     //Actions
 
     public void formsfills(String first, String last, String email, String number, String text){
@@ -44,7 +57,24 @@ public class pageForms {
          txtnumber().fill(number);
          btnradiosexe().click();
          txtcurrentAdress().fill(text);
+        // State
+        page.locator("#state").click();
+        page.locator("#state").locator("input").fill("NCR");
+        page.getByRole(AriaRole.OPTION,
+                new Page.GetByRoleOptions().setName("NCR")
+        ).click();
 
+        page.locator("#city").click();
+        page.locator("#city").locator("input").fill("Delhi");
+        page.getByRole(AriaRole.OPTION,
+                new Page.GetByRoleOptions().setName("Delhi")
+        ).click();
+
+
+    }
+    public void uploadFile(String path) {
+
+        page.setInputFiles("#uploadPicture", Paths.get(path));
     }
     public void open(String url){
         page.navigate(url);
@@ -54,5 +84,10 @@ public class pageForms {
         btnsubmit().click();
     }
     // Assertions (IMPORTANT FIX)
+  public void checkdata(){
 
+      String expectedmsg = page.locator("#example-modal-sizes-title-lg").innerText();
+      String actualMsg="Thanks for submitting the form";
+      Assert.assertEquals(expectedmsg, actualMsg);
+  }
 }

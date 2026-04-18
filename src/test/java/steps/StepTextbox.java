@@ -26,10 +26,10 @@ public class StepTextbox {
     @When("the page textbox displayed fill the {string} and {string} and {string} and {string}")
     public void the_page_textbox_displayed_fill_the_and_and_and(String string, String string2, String string3, String string4) throws Exception {
        // textBoxPage.fillForm(string,string2,string3,string4);
-        String firstname = ExcelUtils.getCellData(2,0);
-        String lastname = ExcelUtils.getCellData(2,1);
-        String email = ExcelUtils.getCellData(2,3);
-        String number = ExcelUtils.getCellData(2,6);
+        String firstname = ExcelUtils.getCellData(3,0);
+        String lastname = ExcelUtils.getCellData(3,1);
+        String email = ExcelUtils.getCellData(3,3);
+        String number = ExcelUtils.getCellData(5,5);
         textBoxPage.fillForm(firstname,lastname,email,number);
 
         textBoxPage.submit();
