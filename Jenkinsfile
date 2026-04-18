@@ -1,9 +1,10 @@
 pipeline {
     agent any
 
-    tools {
-        jdk 'JDK17'
-        maven 'Maven3'
+    stage('Run Tests') {
+        steps {
+            bat 'mvn clean test'
+        }
     }
 
     environment {
