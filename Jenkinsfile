@@ -1,12 +1,6 @@
 pipeline {
     agent any
 
-    stage('Run Tests') {
-        steps {
-            bat 'mvn clean test'
-        }
-    }
-
     environment {
         PLAYWRIGHT_BROWSERS_PATH = '0'
     }
@@ -61,7 +55,6 @@ pipeline {
     }
 
     post {
-
         success {
             echo '✅ Tests executed successfully'
         }
