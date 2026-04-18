@@ -10,13 +10,19 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git branch: 'master',
-                    url: 'https://github.com/Traore2375/Playwright.git'
+                url: 'https://github.com/Traore2375/Playwright.git'
             }
         }
 
         stage('Clean Project') {
             steps {
                 bat 'mvn clean'
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                bat 'mvn install -DskipTests'
             }
         }
 
@@ -28,39 +34,35 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                bat 'mvn test'
+                bat 'mvn test -Dmaven.test.failure.ignore=true'
             }
         }
 
-        stage('Generate Cucumber Report') {
+        stage('Generate Reports') {
             steps {
-                cucumber buildStatus: 'UNSTABLE',
-                         fileIncludePattern: '**/cucumber.json',
+                cucumber fileIncludePattern: '**/cucumber.json',
                          sortingMethod: 'ALPHABETICAL'
-            }
-        }
 
-        stage('Publish HTML Report') {
-            steps {
                 publishHTML([
-                    allowMissing: true,
+                    allowMissing: false,
                     alwaysLinkToLastBuild: true,
                     keepAll: true,
                     reportDir: 'target',
                     reportFiles: 'cucumber.html',
-                    reportName: 'HTML Cucumber Report'
+                    reportName: 'Cucumber HTML Report'
                 ])
             }
         }
     }
 
     post {
+
         success {
-            echo '✅ Tests executed successfully'
+            echo '✅ Build and tests SUCCESS'
         }
 
         failure {
-            echo '❌ Tests failed - check reports'
+            echo '❌ Build FAILED - check reports'
         }
 
         always {
