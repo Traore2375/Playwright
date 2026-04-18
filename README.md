@@ -6,14 +6,12 @@ Ce projet est un framework d’automatisation de tests UI basé sur Playwright +
 Il permet d’automatiser les tests fonctionnels web et de l’intégrer dans une chaîne CI/CD (Jenkins / GitHub Actions).
 
 🎯 Objectifs du projet
-
-✔ Automatiser les tests UI end-to-end
-✔ Simuler les parcours utilisateurs réels
-✔ Détecter les anomalies avant production
-✔ Réduire les régressions applicatives
-✔ Support multi-environnements (QA / DEV / PROD)
-✔ Intégration complète CI/CD
-
+Automatiser les tests UI end-to-end
+Simuler les parcours utilisateurs réels
+Détecter les anomalies avant production
+Réduire les régressions applicatives
+Support multi-environnements (QA / DEV / PROD)
+Intégration complète CI/CD
 🧰 Stack technologique
 🔹 Automatisation UI
 Playwright (Java)
@@ -29,9 +27,6 @@ GitHub Actions
 🔹 Versioning
 Git / GitHub
 🏗 Architecture du framework
-
-Le projet est structuré selon une architecture professionnelle :
-
 📁 Pages (Page Object Model)
 
 Gestion des éléments UI et des actions utilisateur
@@ -56,10 +51,9 @@ Configuration, lecture Excel, helpers
 
 Le framework supporte plusieurs environnements :
 
-✔ QA
-✔ DEV
-✔ PROD
-
+QA
+DEV
+PROD
 🔁 Exécution avec environnement
 mvn test -Denv=qa
 📂 Fichiers de configuration
@@ -73,12 +67,10 @@ mvn clean test
 ▶️ Exécution avec environnement
 mvn test -Denv=qa
 🧪 Types de tests
-
-✔ Smoke Tests
-✔ Regression Tests
-✔ End-to-End Tests
-✔ Tests fonctionnels automatisés
-
+Smoke Tests
+Regression Tests
+End-to-End Tests
+Tests fonctionnels automatisés
 📊 Reporting
 📄 Cucumber Reports
 Rapport JSON
@@ -93,26 +85,20 @@ Screenshots (si activé)
 Rapports HTML
 🔄 CI/CD Integration
 🔧 Jenkins Pipeline
-
-✔ Checkout du code
-✔ Build Maven
-✔ Installation Playwright
-✔ Exécution des tests
-✔ Génération des rapports
-✔ Archivage des artifacts
-
+Checkout du code
+Build Maven
+Installation Playwright
+Exécution des tests
+Génération des rapports
+Archivage des artifacts
 ☁️ GitHub Actions
-
-✔ Exécution automatique sur push
-✔ Validation des Pull Requests
-✔ Génération des rapports
-
+Exécution automatique sur push
+Validation des Pull Requests
+Génération des rapports
 🧪 Playwright Configuration
-
-✔ Mode headless configurable
-✔ Support multi-browser (Chromium / Firefox / WebKit)
-✔ SlowMo pour debug UI
-
+Mode headless configurable
+Support multi-browser (Chromium / Firefox / WebKit)
+SlowMo pour debug UI
 📂 Structure du projet
 src
  ├── main
@@ -127,26 +113,20 @@ src
            ├── config
            └── testdata
 📊 Data Driven Testing
-
-✔ Excel (Apache POI)
-✔ Data Tables Cucumber
-✔ JSON (optionnel)
-
+Excel (Apache POI)
+Data Tables Cucumber
+JSON (optionnel)
 🧠 Bonnes pratiques
-
-✔ Page Object Model (POM)
-✔ Séparation des responsabilités
-✔ Code réutilisable
-✔ Tests indépendants
-✔ Configuration externalisée
-✔ Compatible CI/CD
-
+Page Object Model (POM)
+Séparation des responsabilités
+Code réutilisable
+Tests indépendants
+Configuration externalisée
+Compatible CI/CD
 📌 Prérequis
-
-✔ Java 17+
-✔ Maven 3+
-✔ Jenkins (optionnel)
-
+Java 17+
+Maven 3+
+Jenkins (optionnel)
 👤 Auteur
 
 TRAORE
@@ -155,12 +135,10 @@ QA Automation Engineer / SDET
 Spécialiste CI/CD & Test Automation
 
 📈 Niveau du projet
-
-✔ Intermédiaire → Avancé
-✔ Architecture enterprise-ready
-✔ CI/CD opérationnel
-✔ Projet scalable
-
+Intermédiaire → Avancé
+Architecture enterprise-ready
+CI/CD opérationnel
+Projet scalable
 🚀 Conclusion
 
 Ce framework démontre une maîtrise des outils modernes de test automation, ainsi qu’une intégration complète dans un environnement DevOps professionnel.
