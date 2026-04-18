@@ -12,7 +12,9 @@ public class Hooks {
 
     @Before
     public void setUp() {
+        String url = ConfigLoader.get("base.url");
 
+        page.navigate(url);
         playwright = Playwright.create();
 
         browser = playwright.chromium().launch(
@@ -21,19 +23,7 @@ public class Hooks {
 
         page = browser.newPage();
 
-        page.route("**/*", route -> {
-            String url = route.request().url();
 
-            if (url.contains("doubleclick") ||
-                    url.contains("googlesyndication") ||
-                    url.contains("googleadservices") ||
-                    url.contains("ads")) {
-
-                route.abort();
-            } else {
-                route.resume();
-            }
-        });
         page.navigate("https://demoqa.com");
 
         System.out.println("Browser started");

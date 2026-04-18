@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    parameters {
+        choice(name: 'ENV', choices: ['dev', 'qa', 'staging', 'prod'], description: 'Environment')
+    }
+
     environment {
         PLAYWRIGHT_BROWSERS_PATH = '0'
     }
@@ -13,13 +17,19 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Display Environment') {
+            steps {
+                echo "Running tests on ENV = ${params.ENV}"
+            }
+        }
+
+        stage('Clean Build') {
             steps {
                 bat 'mvn clean install -DskipTests'
             }
         }
 
-        stage('Install Playwright') {
+        stage('Install Playwright Browsers') {
             steps {
                 bat 'mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install"'
             }
@@ -27,7 +37,7 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                bat 'mvn test -Dmaven.test.failure.ignore=true'
+                bat "mvn test -Denv=${params.ENV} -Dmaven.test.failure.ignore=true"
             }
         }
 
@@ -45,11 +55,11 @@ pipeline {
         }
 
         success {
-            echo '✅ SUCCESS'
+            echo "✅ SUCCESS on ${params.ENV}"
         }
 
         failure {
-            echo '❌ FAILURE - check reports'
+            echo "❌ FAILURE on ${params.ENV} - check reports"
         }
     }
 }
