@@ -1,48 +1,43 @@
-name: Playwright Tests
+name: Playwright Tests Multi-Env
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
     branches: [ "master" ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        env: [qa, dev, prod]
+
+    env:
+      PLAYWRIGHT_BROWSERS_PATH: 0
+
     steps:
+
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          distribution: temurin
+          java-version: 17
 
-      - name: Cache Maven dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2
-          key: maven-${{ hashFiles('**/pom.xml') }}
+      - name: Build project
+        run: mvn clean install -DskipTests
 
-      - name: Install dependencies
-        run: mvn clean install
-
-      - name: Install Playwright browsers
+      - name: Install Playwright
         run: mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install --with-deps"
 
-      - name: Run tests
-        run: mvn test
-        env:
-          CI: true
+      - name: Run tests on ${{ matrix.env }}
+        run: mvn test -Denv=${{ matrix.env }}
 
-      - name: Run with display
-        run: xvfb-run mvn test
-
-      - name: Upload Cucumber report
+      - name: Upload reports
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: cucumber-report
-          path: target/cucumber.html
+          name: reports-${{ matrix.env }}
+          path: target/**
