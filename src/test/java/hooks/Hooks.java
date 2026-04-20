@@ -26,7 +26,7 @@ public class Hooks {
         browser = playwright.chromium().launch(
                 new BrowserType.LaunchOptions()
                         .setHeadless(false)
-                        .setSlowMo(200)
+                        .setSlowMo(400)
         );
 
         // 3. Create context + page
