@@ -1,47 +1,14 @@
 stages:
   - test
-  - report
 
 variables:
   PLAYWRIGHT_BROWSERS_PATH: "0"
-  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
 
-cache:
-  paths:
-    - .m2/repository
-
-# 🧪 TEST PLAYWRIGHT
 test:
   stage: test
 
-  image: mcr.microsoft.com/playwright/java:v1.40.0-jammy  # 🔥 FIX ERROR LINUX
+  image: mcr.microsoft.com/playwright/java:v1.40.0-jammy
 
   script:
     - echo "Running Playwright tests..."
     - mvn clean test -Denv=qa
-
-  artifacts:
-    when: always
-    paths:
-      - target/
-      - target/cucumber-reports/
-      - target/surefire-reports/
-      - target/playwright-report/   # 🔥 HTML REPORT
-    expire_in: 7 days
-
-# 📊 HTML REPORT (optionnel mais propre)
-report:
-  stage: report
-  image: alpine:latest
-
-  needs: ["test"]
-
-  script:
-    - echo "HTML report available in artifacts"
-
-  artifacts:
-    when: always
-    paths:
-      - target/playwright-report/
-      - target/cucumber-reports/
-    expire_in: 7 days
