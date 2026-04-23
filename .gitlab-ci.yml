@@ -2,7 +2,14 @@ stages:
   - test
 
 variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
   PLAYWRIGHT_BROWSERS_PATH: "0"
+  ENV: "qa"
+  HEADLESS: "true"   # 🔥 force le mode headless
+
+cache:
+  paths:
+    - .m2/repository
 
 test:
   stage: test
@@ -10,5 +17,16 @@ test:
   image: mcr.microsoft.com/playwright/java:v1.40.0-jammy
 
   script:
-    - echo "Running Playwright tests..."
-    - mvn clean test -Denv=qa
+    - echo "Running tests on ENV=$ENV with HEADLESS=$HEADLESS"
+
+    # 🔥 on force headless via JVM (SANS TOUCHER JAVA)
+    - mvn clean test -Denv=$ENV -Dheadless=$HEADLESS
+
+  artifacts:
+    when: always
+    paths:
+      - target/
+      - target/playwright-report/
+      - target/cucumber-reports/
+      - target/surefire-reports/
+    expire_in: 7 days
