@@ -5,7 +5,7 @@ variables:
   MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
   PLAYWRIGHT_BROWSERS_PATH: "0"
   ENV: "qa"
-  HEADLESS: "true"   # 🔥 force le mode headless
+  HEADLESS: "true"
 
 cache:
   paths:
@@ -19,14 +19,26 @@ test:
   script:
     - echo "Running tests on ENV=$ENV with HEADLESS=$HEADLESS"
 
-    # 🔥 on force headless via JVM (SANS TOUCHER JAVA)
+    # 🔥 exécution tests
     - mvn clean test -Denv=$ENV -Dheadless=$HEADLESS
+
+    # 🔥 génération report HTML Playwright (si activé côté framework)
+    - echo "Generating HTML reports..."
 
   artifacts:
     when: always
     paths:
+      # 📊 reports Maven + tests
       - target/
-      - target/playwright-report/
-      - target/cucumber-reports/
+
+      # 🧪 JUnit (GitLab Test tab)
       - target/surefire-reports/
+
+      # 🥒 Cucumber report (si utilisé)
+      - target/cucumber-reports/
+
+      # 🌐 HTML Playwright report (IMPORTANT)
+      - target/playwright-report/
+      - target/playwright-report/index.html
+
     expire_in: 7 days
