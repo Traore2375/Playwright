@@ -1,42 +1,24 @@
 stages:
-  - build
   - test
   - report
 
 variables:
-  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
   PLAYWRIGHT_BROWSERS_PATH: "0"
-  ENV: "qa"
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
 
 cache:
   paths:
     - .m2/repository
 
-before_script:
-  - echo "Starting CI for Playwright Java project"
-  - mvn -version
-
-# 🧱 BUILD
-build:
-  stage: build
-  image: maven:3.9.6-eclipse-temurin-17
-  script:
-    - mvn clean install -DskipTests
-  artifacts:
-    paths:
-      - target/
-    expire_in: 1 day
-
-# 🧪 TEST (MANUEL)
+# 🧪 TEST PLAYWRIGHT
 test:
   stage: test
-  image: maven:3.9.6-eclipse-temurin-17
-  when: manual
+
+  image: mcr.microsoft.com/playwright/java:v1.40.0-jammy  # 🔥 FIX ERROR LINUX
 
   script:
-    - echo "Running tests on ENV=$ENV"
-    - mvn exec:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install"
-    - mvn test -Denv=$ENV -Dmaven.test.failure.ignore=true
+    - echo "Running Playwright tests..."
+    - mvn clean test -Denv=qa
 
   artifacts:
     when: always
@@ -44,22 +26,22 @@ test:
       - target/
       - target/cucumber-reports/
       - target/surefire-reports/
-    reports:
-      junit: target/surefire-reports/*.xml
+      - target/playwright-report/   # 🔥 HTML REPORT
+    expire_in: 7 days
 
-# 📊 REPORT (corrigé)
+# 📊 HTML REPORT (optionnel mais propre)
 report:
   stage: report
   image: alpine:latest
 
-  when: manual
-  needs: ["test"]   # 🔥 IMPORTANT : dépend du job test
+  needs: ["test"]
 
   script:
-    - echo "Publishing reports..."
+    - echo "HTML report available in artifacts"
 
   artifacts:
+    when: always
     paths:
+      - target/playwright-report/
       - target/cucumber-reports/
-      - target/surefire-reports/
     expire_in: 7 days
