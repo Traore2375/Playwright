@@ -5,8 +5,6 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import utils.ExcelUtils;
 
-import java.nio.file.Paths;
-
 public class Hooks {
 
     public static Playwright playwright;
@@ -34,10 +32,7 @@ public class Hooks {
         // 3. Create context + page
         BrowserContext context = browser.newContext();
         page = context.newPage();
-        context.tracing().stop(
-                new Tracing.StopOptions()
-                        .setPath(Paths.get("target/playwright-report/trace.zip"))
-        );
+
 
         // 4. Load config URL (option clean)
         String url = ConfigLoader.get("base.url");
