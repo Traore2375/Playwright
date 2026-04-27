@@ -5,6 +5,8 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import org.testng.Assert;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
 public class PageAlerts {
 
     private Page page;
@@ -45,10 +47,11 @@ public class PageAlerts {
     public void alerts1(){
         //menualerts().click();
         btnclickmefirst().click();
+
         page.onDialog(dialog -> {
             dialog.accept(); // ou accept()
         });
-
+        assertThat(btnclickmefirst()).isChecked();
     }
   public void alerts3(){
       btnclickmethirst().click();
@@ -70,5 +73,9 @@ public class PageAlerts {
   }
     public void open(String url){
         page.navigate(url);
+    }
+
+    public void verify(){
+        assertThat(menualerts()).isChecked();
     }
 }
