@@ -35,11 +35,8 @@ test:
       # 🧪 JUnit (GitLab test tab)
       - target/surefire-reports/
 
-      # 🥒 CUCUMBER REPORTS (HTML + JSON obligatoires)
+      # 🥒 CUCUMBER REPORTS
       - target/cucumber-reports/cucumber.html
       - target/cucumber-reports/cucumber.json
-
-      # 🌐 Playwright reports (si activé dans code)
-      - target/playwright-report/
 
     expire_in: 7 days
