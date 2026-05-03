@@ -19,25 +19,27 @@ test:
   script:
     - echo "Running tests on ENV=$ENV with HEADLESS=$HEADLESS"
 
-    # 🔥 exécution tests
+    # 🔥 Run tests Maven + Cucumber + Playwright
     - mvn clean test -Denv=$ENV -Dheadless=$HEADLESS
 
-    # 🔥 génération report HTML Playwright (si activé côté framework)
-    - echo "Generating HTML reports..."
+    # 🔥 Génération explicite rapport Cucumber (si plugin actif)
+    - echo "Ensuring cucumber reports are generated..."
 
   artifacts:
     when: always
     paths:
-      # 📊 reports Maven + tests
+      # 📦 Maven results
       - target/
 
       # 🧪 JUnit (GitLab Test tab)
       - target/surefire-reports/
 
-      # 🥒 Cucumber report (si utilisé)
+      # 🥒 Cucumber JSON / HTML reports
       - target/cucumber-reports/
+      - target/cucumber-reports/**/*.html
+      - target/cucumber-reports/**/*.json
 
-      # 🌐 HTML Playwright report (IMPORTANT)
+      # 🌐 Playwright HTML report
       - target/playwright-report/
       - target/playwright-report/index.html
 

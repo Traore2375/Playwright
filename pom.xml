@@ -15,36 +15,29 @@
     </properties>
 
     <dependencies>
-        <!-- Source: https://mvnrepository.com/artifact/org.testng/testng -->
+
+        <!-- TESTNG -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>7.12.0</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- APACHE POI -->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
             <version>5.2.5</version>
         </dependency>
-        <dependency>
-            <groupId>com.microsoft.playwright</groupId>
-            <artifactId>playwright</artifactId>
-            <version>1.45.0</version>
-        </dependency>
+
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>5.2.5</version>
         </dependency>
 
-        <dependency>
-            <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-cucumber7-jvm</artifactId>
-            <version>2.24.0</version>
-        </dependency>
-
-        <!-- PLAYWRIGHT -->
+        <!-- PLAYWRIGHT (KEEP ONLY ONCE) -->
         <dependency>
             <groupId>com.microsoft.playwright</groupId>
             <artifactId>playwright</artifactId>
@@ -73,7 +66,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- JUNIT SUITE (for @Suite runner) -->
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-suite</artifactId>
@@ -81,24 +73,37 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- CUCUMBER REPORTING (IMPORTANT FOR CI) -->
+        <dependency>
+            <groupId>net.masterthought</groupId>
+            <artifactId>cucumber-reporting</artifactId>
+            <version>5.8.1</version>
+        </dependency>
+
+        <!-- ALLURE CUCUMBER -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-cucumber7-jvm</artifactId>
+            <version>2.24.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
+
         <plugins>
 
-            <!-- COMPILER (IMPORTANT FIX FOR JAVA 17) -->
+            <!-- JAVA 17 COMPILER -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
                 <configuration>
-                    <source>17</source>
-                    <target>17</target>
                     <release>17</release>
                 </configuration>
             </plugin>
 
-            <!-- SUREFIRE (RUN TESTS PROPERLY) -->
+            <!-- SUREFIRE (TEST RUNNER) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -109,6 +114,7 @@
             </plugin>
 
         </plugins>
+
     </build>
 
 </project>
