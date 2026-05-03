@@ -19,24 +19,26 @@ test:
   script:
     - echo "Running tests on ENV=$ENV with HEADLESS=$HEADLESS"
 
-    # 🔥 Run tests (Maven + Cucumber + Playwright)
+    # 🔥 Run tests (fail visible, pas masqué)
     - mvn clean test -Denv=$ENV -Dheadless=$HEADLESS
 
-    # 🔍 Debug
+    # 🔍 Debug obligatoire
     - echo "=== TARGET CONTENT ==="
-    - ls -R target || true
+    - ls -R target
 
   artifacts:
     when: always
     paths:
-      # 📦 Maven results
+      # 📦 Maven output
       - target/
 
       # 🧪 JUnit (GitLab test tab)
       - target/surefire-reports/
 
-      # 🥒 CUCUMBER REPORTS
-      - target/cucumber-reports/cucumber.html
-      - target/cucumber-reports/cucumber.json
+      # 🥒 Cucumber (HTML + JSON via runner Java)
+      - target/cucumber-reports/
+
+    reports:
+      junit: target/surefire-reports/*.xml
 
     expire_in: 7 days
