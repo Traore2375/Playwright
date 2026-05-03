@@ -19,10 +19,10 @@ test:
   script:
     - echo "Running tests on ENV=$ENV with HEADLESS=$HEADLESS"
 
-    # 🔥 Run tests (fail-safe pour éviter pipeline cassé)
-    - mvn clean test -Denv=$ENV -Dheadless=$HEADLESS || true
+    # 🔥 Run tests (Maven + Cucumber + Playwright)
+    - mvn clean test -Denv=$ENV -Dheadless=$HEADLESS
 
-    # 🔍 Debug pour vérifier les reports
+    # 🔍 Debug
     - echo "=== TARGET CONTENT ==="
     - ls -R target || true
 
@@ -32,13 +32,14 @@ test:
       # 📦 Maven results
       - target/
 
-      # 🧪 JUnit (GitLab Test tab)
+      # 🧪 JUnit (GitLab test tab)
       - target/surefire-reports/
 
-      # 🥒 Cucumber reports (FIX : chemin unique)
-      - target/cucumber-reports/
+      # 🥒 CUCUMBER REPORTS (HTML + JSON obligatoires)
+      - target/cucumber-reports/cucumber.html
+      - target/cucumber-reports/cucumber.json
 
-      # 🌐 Playwright reports (optionnel si généré)
+      # 🌐 Playwright reports (si activé dans code)
       - target/playwright-report/
 
     expire_in: 7 days
