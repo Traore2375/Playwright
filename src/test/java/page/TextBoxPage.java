@@ -1,6 +1,7 @@
 package page;
 
 import com.microsoft.playwright.*;
+import com.microsoft.playwright.assertions.PlaywrightAssertions;
 
 public class TextBoxPage {
 
@@ -42,6 +43,7 @@ public class TextBoxPage {
         email().fill(mail);
         currentAddress().fill(current);
         permanentAddress().fill(permanent);
+
     }
 
     public void submit() {

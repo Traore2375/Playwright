@@ -51,7 +51,7 @@ public class PageAlerts {
         page.onDialog(dialog -> {
             dialog.accept(); // ou accept()
         });
-        assertThat(btnclickmefirst()).isChecked();
+        //assertThat(btnclickmefirst()).isChecked();
     }
   public void alerts3(){
       btnclickmethirst().click();

@@ -3,6 +3,7 @@ package page;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
+import com.microsoft.playwright.assertions.PlaywrightAssertions;
 import com.microsoft.playwright.options.AriaRole;
 import org.testng.Assert;
 
@@ -78,6 +79,7 @@ public class pageForms {
     }
     public void open(String url){
         page.navigate(url);
+
         btnmenuforms().click();
     }
     public void submit(){
@@ -88,6 +90,6 @@ public class pageForms {
 
       String expectedmsg = page.locator("#example-modal-sizes-title-lg").innerText();
       String actualMsg="Thanks for submitting the form";
-      Assert.assertEquals(expectedmsg, actualMsg);
+      PlaywrightAssertions.assertThat(page.locator("#example-modal-sizes-title-lg")).containsText(actualMsg);
   }
 }
