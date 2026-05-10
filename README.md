@@ -1,144 +1,150 @@
-📘 Playwright Automation Framework (QA / CI-CD Ready)
-🚀 Présentation
+# 🚀 Playwright Automation Framework
 
-Ce projet est un framework d’automatisation de tests UI basé sur Playwright + Java + Cucumber, conçu pour les environnements modernes de Quality Assurance et DevOps.
+> ⚡ Modern UI Test Automation Framework | Java | Cucumber | CI/CD Ready  
+> 🧪 Scalable • Maintainable • Enterprise-Ready
 
-Il permet d’automatiser les tests fonctionnels web et de l’intégrer dans une chaîne CI/CD (Jenkins / GitHub Actions).
+---
 
-🎯 Objectifs du projet
-Automatiser les tests UI end-to-end
-Simuler les parcours utilisateurs réels
-Détecter les anomalies avant production
-Réduire les régressions applicatives
-Support multi-environnements (QA / DEV / PROD)
-Intégration complète CI/CD
-🧰 Stack technologique
-🔹 Automatisation UI
-Playwright (Java)
-🔹 Framework de test
-Cucumber (BDD)
-🔹 Langage
-Java
-🔹 Build Tool
-Maven
-🔹 CI/CD
-Jenkins
-GitHub Actions
-🔹 Versioning
-Git / GitHub
-🏗 Architecture du framework
-📁 Pages (Page Object Model)
+# 🎨 Overview (Portfolio Style)
 
-Gestion des éléments UI et des actions utilisateur
+This project is a **UI automation framework** built with **Playwright + Java + Cucumber**, designed for QA Engineers and DevOps pipelines.
 
-🧪 Step Definitions
+It supports:
+- End-to-end testing
+- BDD (Behavior Driven Development)
+- CI/CD integration
+- Multi-environment execution
 
-Implémentation des scénarios Gherkin
+---
 
-🔧 Hooks
+# 🎯 Objectives (Enterprise Style)
 
-Gestion du cycle de vie des tests (Before / After)
+✔ Automate UI end-to-end tests  
+✔ Simulate real user behavior  
+✔ Reduce regression risks  
+✔ Improve release quality  
+✔ Support DEV / QA / PROD environments  
+✔ Integrate with CI/CD pipelines  
 
-📜 Features
+---
 
-Scénarios métier écrits en Gherkin
+# 🧰 Tech Stack (Clean Style)
 
-⚙️ Utils
+- :contentReference[oaicite:1]{index=1}  
+- Java 17+  
+- Cucumber (BDD)  
+- Maven  
+- Git / GitHub  
+- Jenkins / GitHub Actions  
 
-Configuration, lecture Excel, helpers
+---
 
-🌍 Gestion des environnements
+# 🏗 Architecture (SDET Style)
 
-Le framework supporte plusieurs environnements :
 
-QA
-DEV
-PROD
-🔁 Exécution avec environnement
-mvn test -Denv=qa
-📂 Fichiers de configuration
-src/test/resources/config/
- ├── qa.properties
- ├── dev.properties
- └── prod.properties
-⚙️ Exécution des tests
-▶️ Exécution locale
-mvn clean test
-▶️ Exécution avec environnement
-mvn test -Denv=qa
-🧪 Types de tests
-Smoke Tests
-Regression Tests
-End-to-End Tests
-Tests fonctionnels automatisés
-📊 Reporting
-📄 Cucumber Reports
-Rapport JSON
-Rapport HTML
-📊 Allure Reports (optionnel)
-Dashboard interactif
-Historique des tests
-Analyse des échecs
-📁 Artifacts CI
-Logs d’exécution
-Screenshots (si activé)
-Rapports HTML
-🔄 CI/CD Integration
-🔧 Jenkins Pipeline
-Checkout du code
-Build Maven
-Installation Playwright
-Exécution des tests
-Génération des rapports
-Archivage des artifacts
-☁️ GitHub Actions
-Exécution automatique sur push
-Validation des Pull Requests
-Génération des rapports
-🧪 Playwright Configuration
-Mode headless configurable
-Support multi-browser (Chromium / Firefox / WebKit)
-SlowMo pour debug UI
-📂 Structure du projet
 src
- ├── main
- └── test
-      ├── java
-      │    ├── pages
-      │    ├── steps
-      │    ├── hooks
-      │    └── utils
-      └── resources
-           ├── features
-           ├── config
-           └── testdata
-📊 Data Driven Testing
-Excel (Apache POI)
-Data Tables Cucumber
-JSON (optionnel)
-🧠 Bonnes pratiques
-Page Object Model (POM)
-Séparation des responsabilités
-Code réutilisable
-Tests indépendants
-Configuration externalisée
-Compatible CI/CD
-📌 Prérequis
-Java 17+
-Maven 3+
-Jenkins (optionnel)
-👤 Auteur
+├── main
+└── test
+├── java
+│ ├── pages → Page Object Model
+│ ├── steps → Step Definitions
+│ ├── hooks → Before / After hooks
+│ └── utils → Helpers / Config
+└── resources
+├── features → Gherkin Scenarios
+├── config → Environment files
+└── testdata → Test data
 
-TRAORE
 
-QA Automation Engineer / SDET
-Spécialiste CI/CD & Test Automation
+---
 
-📈 Niveau du projet
-Intermédiaire → Avancé
-Architecture enterprise-ready
-CI/CD opérationnel
-Projet scalable
-🚀 Conclusion
+# 🌍 Environments (DevOps Style)
 
-Ce framework démontre une maîtrise des outils modernes de test automation, ainsi qu’une intégration complète dans un environnement DevOps professionnel.
+| Env  | Description     |
+|------|-----------------|
+| DEV  | Development     |
+| QA   | Testing         |
+| PROD | Production      |
+
+---
+
+# ⚙️ Execution (Developer Style)
+
+### ▶️ Run all tests
+```bash id="exec1"
+mvn clean test
+▶️ Run with environment
+mvn test -Denv=qa
+📂 Configuration (Clean Style)
+src/test/resources/config/
+ ├── dev.properties
+ ├── qa.properties
+ └── prod.properties
+``` id="cfg1"
+
+---
+
+# 🧪 Test Strategy (QA Style)
+
+✔ Smoke Tests  
+✔ Regression Tests  
+✔ End-to-End Tests  
+✔ Functional Tests  
+
+---
+
+# 📊 Reporting (QA / Manager Style)
+
+✔ Cucumber HTML Reports  
+✔ JSON Reports  
+✔ (Optional) Allure Dashboard  
+
+---
+
+# 🔄 CI/CD Pipeline (DevOps Style)
+
+## 🔧 Jenkins
+- Checkout code  
+- Build project (Maven)  
+- Run tests  
+- Generate reports  
+- Archive artifacts  
+
+## ☁️ GitHub Actions
+- Trigger on push / PR  
+- Execute test suite  
+- Publish reports  
+
+---
+
+# 🧠 Best Practices (SDET Style)
+
+✔ Page Object Model (POM)  
+✔ Reusable components  
+✔ Independent tests  
+✔ External configuration  
+✔ Clean architecture  
+✔ CI/CD friendly  
+
+---
+
+# 👤 Author
+
+**TRAORE**  
+QA Automation Engineer / SDET  
+CI/CD & Test Automation Specialist  
+
+---
+
+# 📈 Project Level
+
+🚀 Intermediate → Advanced  
+🏗 Enterprise-grade architecture  
+⚙️ Scalable automation framework  
+🔥 Production-ready CI/CD integration  
+
+---
+
+# 🚀 Conclusion
+
+This framework demonstrates a **modern QA automation architecture** using **Playwright**, Cucumber BDD, and CI/C
