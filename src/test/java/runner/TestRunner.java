@@ -6,7 +6,10 @@ import org.junit.platform.suite.api.*;
 @IncludeEngines("cucumber")
 @SelectClasspathResource("features")
 @ConfigurationParameter(key = "cucumber.glue", value = "steps, hooks")
-
+@ConfigurationParameter(
+        key = "cucumber.filter.tags",
+        value = "@modals"
+)
 
 @ConfigurationParameter(
         key = "cucumber.plugin",
