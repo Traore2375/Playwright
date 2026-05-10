@@ -41,19 +41,18 @@ It supports:
 
 # 🏗 Architecture (SDET Style)
 
-
 src
 ├── main
 └── test
 ├── java
-│ ├── pages → Page Object Model
-│ ├── steps → Step Definitions
-│ ├── hooks → Before / After hooks
-│ └── utils → Helpers / Config
+│ ├── pages # Page Object Model
+│ ├── steps # Step Definitions
+│ ├── hooks # Before / After hooks
+│ └── utils # Utilities & helpers
 └── resources
-├── features → Gherkin Scenarios
-├── config → Environment files
-└── testdata → Test data
+├── features # Gherkin scenarios
+├── config # environment configs
+└── testdata # test data files
 
 
 ---
