@@ -14,10 +14,6 @@ import org.junit.platform.suite.api.Suite;
         value = "steps, hooks"
 )
 
-@ConfigurationParameter(
-        key = "cucumber.filter.tags",
-        value = "@select"
-)
 
 @ConfigurationParameter(
         key = "cucumber.plugin",
